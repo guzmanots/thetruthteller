@@ -11,6 +11,18 @@
             </style>
 </head>
 <body> 
+    <script>
+             const btnPost = document.getElementById('btn-post');
+
+btnPost.addEventListener('click', function() {
+  const newComment = document.getElementById('new-comment').value;
+  const commentContainer = document.getElementById('comment-container');
+  const commentElement = document.createElement('p');
+  commentElement.innerText = newComment;
+  commentContainer.appendChild(commentElement);
+  document.getElementById('new-comment').value = '';
+});
+    </script>
     <style>
         p {
             text-align: center;margin-left: 40px;
@@ -297,7 +309,7 @@ It's estimated that from the 228 shows in 180 days that this band performed, the
         <button type="button" id="btn-post">Post Comment</button>
         <div id="comment-container"></div>
       </form>
-        
+ 
 </p>
 </body>
 
