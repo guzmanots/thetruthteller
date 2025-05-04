@@ -292,38 +292,34 @@ It's estimated that from the 228 shows in 180 days that this band performed, the
         <i>“The information provided on this page is based on the personal accounts and experiences of former members of Old Time Sailors Ltd. All allegations are presented in good faith for public awareness and transparency. We welcome any corrections or responses from parties involved.”</i>
 
        </h6> 
-       <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Add new comment</title>
-    </head>
-    <body>
-        <h3>Please add your comment</h3>
-        <div id="comment-container">
-            <!-- Existing comments will go here -->
+       <div class="comment">
+        <textarea id="title" type="text "rows="2" cols="4" onkeyup="Allow()" placeholder="write a comment......"></textarea>
+        <input type="submit" value="Post" onclick="insert()" style="width:20px;" /></form>
         </div>
-        <textarea name="" id="new-comment" cols="60" rows="5"></textarea>
-        <br>
-        <button id="btn-post">Post</button>
-        <script>
-           document.getElementById("btn-post").addEventListener("click", function () {
-    // This line sets up an event listener for the click event on the "Post" button.
-    // When the button is clicked, the function provided as the second argument will run.
-
-    // Step 2: Get the comment from the textarea
-    const newComment = document.getElementById("new-comment").value;
-
-    // Step 3: Create a new paragraph element for the comment
-    const commentContainer = document.getElementById("comment-container");
-    const commentElement = document.createElement("p");
-    commentElement.innerText = newComment;
-
-    // Step 4: Append the comment to the comment container
-    commentContainer.appendChild(commentElement);
-
-    // Clear the textarea after posting the comment
-    document.getElementById("new-comment").value = "";
-});
+        <div id="display"></div>
+        <script type="text/javascript">
+        var titles = [];
+        var titleInput = document.getElementById("title");
+        var messageBox = document.getElementById("display");
+        function Allow()
+        {
+        if (!user.title.value.match(/[a-zA-Z]$/) && user.title.value !="")
+        {
+        user.title.value="";
+        alert("Please Enter only alphabets");
+        }
+        window.location.reload()
+        }
+        function insert () {
+        titles.push(titleInput.value);
+        clearAndShow();
+        }
+        function clearAndShow ()
+        {
+        titleInput.value = "";
+        messageBox.innerHTML = "";
+        messageBox.innerHTML += " " + titles.join("<br/> ") + "<br/>";
+        }
         </script>
 </body>
 
