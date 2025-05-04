@@ -1,50 +1,4 @@
 <!DOCTYPE html>
-<script>
- let comments = []; // Store comments in an array
-
-function saveComment() {
-const commentText = document.getElementById("comment-input").value;
-
-if (commentText.trim() !== "") { // Check for empty comment
-comments.push(commentText);  // Add the comment to the array
-
-// Update the comment box (Dynamic HTML)
-let commentBoxHTML = "";
-comments.forEach(comment => {
- commentBoxHTML += `<p>${comment}</p>`;
-});
-document.getElementById("comment-box").innerHTML = commentBoxHTML; // Update the comment box
-
-document.getElementById("comment-input").value = ""; // Clear the input
-}
-}
-
-// Attach the function to the submit button
-document.getElementById("submit-comment").addEventListener("click", saveComment);
-
-// Example: Load saved comments from local storage on page load (optional)
-if (localStorage.getItem("comments")) {
-comments = JSON.parse(localStorage.getItem("comments")); // Get stored data
-dynamicUpdate();
-}
-
-// Store comments to local storage (optional)
-function saveToLocalStorage() {
-localStorage.setItem("comments", JSON.stringify(comments));
-}
-
-//Call saveToLocalStorage() after saving the comment
-submit_comment.addEventListener("click", saveToLocalStorage);
-
-// Dynamically update the comment box
-function dynamicUpdate() {
-let commentBoxHTML = "";
-comments.forEach(comment => {
-commentBoxHTML += `<p>${comment}</p>`;
-});
-document.getElementById("comment-box").innerHTML = commentBoxHTML;
-}
-</script>
 <html>
 <head>
     <META charset="utf-8">
@@ -338,11 +292,39 @@ It's estimated that from the 228 shows in 180 days that this band performed, the
         <i>“The information provided on this page is based on the personal accounts and experiences of former members of Old Time Sailors Ltd. All allegations are presented in good faith for public awareness and transparency. We welcome any corrections or responses from parties involved.”</i>
 
        </h6> 
-       <textarea id="comment-input"></textarea>
-       <button id="submit-comment">Submit Comment</button>
-       <div id="comment-box">
-         <!-- Comments will be added here dynamically -->
-       </div>
+       <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add new comment</title>
+    </head>
+    <body>
+        <h1>Please add your comment</h1>
+        <div id="comment-container">
+            <!-- Existing comments will go here -->
+        </div>
+        <textarea name="" id="new-comment" cols="60" rows="5"></textarea>
+        <br>
+        <button id="btn-post">Post</button>
+        <script>
+           document.getElementById("btn-post").addEventListener("click", function () {
+    // This line sets up an event listener for the click event on the "Post" button.
+    // When the button is clicked, the function provided as the second argument will run.
+
+    // Step 2: Get the comment from the textarea
+    const newComment = document.getElementById("new-comment").value;
+
+    // Step 3: Create a new paragraph element for the comment
+    const commentContainer = document.getElementById("comment-container");
+    const commentElement = document.createElement("p");
+    commentElement.innerText = newComment;
+
+    // Step 4: Append the comment to the comment container
+    commentContainer.appendChild(commentElement);
+
+    // Clear the textarea after posting the comment
+    document.getElementById("new-comment").value = "";
+});
+        </script>
 </body>
 
 </html>
