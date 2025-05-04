@@ -1,4 +1,55 @@
 <!DOCTYPE html>
+<textarea id="comment-input"></textarea>
+<button id="submit-comment">Submit Comment</button>
+<div id="comment-box">
+  <!-- Comments will be added here dynamically -->
+</div>
+<script>
+ let comments = []; // Store comments in an array
+
+function saveComment() {
+const commentText = document.getElementById("comment-input").value;
+
+if (commentText.trim() !== "") { // Check for empty comment
+comments.push(commentText);  // Add the comment to the array
+
+// Update the comment box (Dynamic HTML)
+let commentBoxHTML = "";
+comments.forEach(comment => {
+ commentBoxHTML += `<p>${comment}</p>`;
+});
+document.getElementById("comment-box").innerHTML = commentBoxHTML; // Update the comment box
+
+document.getElementById("comment-input").value = ""; // Clear the input
+}
+}
+
+// Attach the function to the submit button
+document.getElementById("submit-comment").addEventListener("click", saveComment);
+
+// Example: Load saved comments from local storage on page load (optional)
+if (localStorage.getItem("comments")) {
+comments = JSON.parse(localStorage.getItem("comments")); // Get stored data
+dynamicUpdate();
+}
+
+// Store comments to local storage (optional)
+function saveToLocalStorage() {
+localStorage.setItem("comments", JSON.stringify(comments));
+}
+
+//Call saveToLocalStorage() after saving the comment
+submit_comment.addEventListener("click", saveToLocalStorage);
+
+// Dynamically update the comment box
+function dynamicUpdate() {
+let commentBoxHTML = "";
+comments.forEach(comment => {
+commentBoxHTML += `<p>${comment}</p>`;
+});
+document.getElementById("comment-box").innerHTML = commentBoxHTML;
+}
+</script>
 <html>
 <head>
     <META charset="utf-8">
@@ -292,57 +343,7 @@ It's estimated that from the 228 shows in 180 days that this band performed, the
         <i>“The information provided on this page is based on the personal accounts and experiences of former members of Old Time Sailors Ltd. All allegations are presented in good faith for public awareness and transparency. We welcome any corrections or responses from parties involved.”</i>
 
        </h6> 
-       <textarea id="comment-input"></textarea>
-       <button id="submit-comment">Submit Comment here</button>
-       <div id="comment-box">
-         <!-- Comments will be added here dynamically -->
-       </div>
-       <script>
-        let comments = []; // Store comments in an array
-
-function saveComment() {
-  const commentText = document.getElementById("comment-input").value;
-
-  if (commentText.trim() !== "") { // Check for empty comment
-    comments.push(commentText);  // Add the comment to the array
-
-    // Update the comment box (Dynamic HTML)
-    let commentBoxHTML = "";
-    comments.forEach(comment => {
-        commentBoxHTML += `<p>${comment}</p>`;
-    });
-    document.getElementById("comment-box").innerHTML = commentBoxHTML; // Update the comment box
-
-    document.getElementById("comment-input").value = ""; // Clear the input
-  }
-}
-
-// Attach the function to the submit button
-document.getElementById("submit-comment").addEventListener("click", saveComment);
-
-// Example: Load saved comments from local storage on page load (optional)
-if (localStorage.getItem("comments")) {
-  comments = JSON.parse(localStorage.getItem("comments")); // Get stored data
-  dynamicUpdate();
-}
-
-// Store comments to local storage (optional)
-function saveToLocalStorage() {
-  localStorage.setItem("comments", JSON.stringify(comments));
-}
-
-//Call saveToLocalStorage() after saving the comment
-submit_comment.addEventListener("click", saveToLocalStorage);
-
-// Dynamically update the comment box
-function dynamicUpdate() {
-  let commentBoxHTML = "";
-  comments.forEach(comment => {
-    commentBoxHTML += `<p>${comment}</p>`;
-  });
-  document.getElementById("comment-box").innerHTML = commentBoxHTML;
-}
-       </script>
+ 
 </body>
 
 </html>
